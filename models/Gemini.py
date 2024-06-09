@@ -82,7 +82,7 @@ def get_answer_from_gemini_sample(type_, prompt, question, images, model, max_to
                 new_prompt = new_prompt[1:]
             if new_prompt[-1] == "":
                 new_prompt = new_prompt[:-1]
-
+            print(new)
             response = create_response_gemini(new_prompt, model=model, max_tokens=max_tokens, temperature=temperature)
             # import pdb
             # pdb.set_trace()
@@ -101,6 +101,7 @@ def get_answer_from_gemini_sample(type_, prompt, question, images, model, max_to
 
 
 def create_response_gemini(messages, model="gemini-pro-vision", max_tokens=256, temperature=0.0, candidate_count=1, stop_sequences=None):
+    print(messages)
     safety_settings = [
     {
         "category": "HARM_CATEGORY_DANGEROUS",
@@ -157,7 +158,6 @@ def test():
     
     # for model in genai.list_models():
     #     pprint.pprint(model)
-    
     answer = get_answer_from_gemini_sample(type_, prompt, question, image_path, model, max_tokens=512, temperature=0.0)
     
     print(answer)
@@ -236,8 +236,8 @@ You are not supposed to solve the problem. Wrap your final answer, a word or a s
                         assert len(line['options']) == 5, f"len(line['options']) == {len(line['options'])} != 5"
                         options = f"(A) {line['options'][0]}\n(B) {line['options'][1]}\n(C) {line['options'][2]}\n(D) {line['options'][3]}\n(E) {line['options'][4]}\n"
                     question = f"{question}\n{options}"
-                    
-                    response = get_answer_from_gemini_sample('vision', prompt, question, line['images'], model, max_tokens=max_tokens, temperature=0.0)
+
+                    response = get_answer_from_gemini_sample('vision', prompt, question, line['image'], model, max_tokens=max_tokens, temperature=0.0)
 
                     res = {'response': response}
         

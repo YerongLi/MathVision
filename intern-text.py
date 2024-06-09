@@ -53,7 +53,7 @@ for key in tqdm(data):
     if DEBUG and cnt > 3: break
 
 # Save the updated data to a new JSON file
-file_path = f'data/{FILE}_ans.jsonl'
+file_path = f'data/{FILE}_text_ans.jsonl'
 
 # Check if the file exists and remove it if it does
 if os.path.exists(file_path):
