@@ -33,7 +33,8 @@ for key in tqdm(data):
     question = data[key]['question']
     cleaned_question = re.sub(r"<image\d+>", "", question).strip()
     re.sub(r"<image\d+>", "", question).strip()
-    query_cot = f'Please first solve the problem step by step, then put your final answer or a single letter (if it is a multiple choice question) in one \"\\boxed{}\". \n {cleaned_question}'
+    benchmark_prompt = "Please first solve the problem step by step, then put your final answer or a single letter (if it is a multiple choice question) in one \"\\boxed{}\". \n"
+    query_cot = benchmark_prompt + cleaned_question
     image_path = entry["image"]
     image = image_path
     
